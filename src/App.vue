@@ -16,16 +16,27 @@
 
     import { mapState } from 'vuex';
     import { mapGetters } from 'vuex';
+    import { mapActions } from 'vuex';
 
     export default {
         name: 'app',
         methods:{
             remove(id){
-                this.$store.commit('removeUser', id);
+                //actions return a promise
+                this.removeUser(id).then(()=>{
+                    this.addUser(this.createDummyUser())
+                });
             },
             add(){
-                this.$store.commit('addUser', {id: this.getLastId, name: 'New User', age: Math.floor(Math.random()*40 + 18)});
-            }
+                this.addUser(this.createDummyUser());
+            },
+            createDummyUser(){
+                return {id: this.getLastId, name: 'New User', age: Math.floor(Math.random()*40 + 18)}
+            },
+            ...mapActions([
+                'addUser',
+                'removeUser'
+            ])
         },
         computed: {
             dummyValue(){

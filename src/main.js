@@ -26,6 +26,14 @@ const store = new Vuex.Store({
                 }
             }
         }
+    },
+    actions: {
+        addUser({commit}, user){
+            commit('addUser', user);
+        },
+        removeUser({commit}, id){
+            commit('removeUser', id);
+        }
     }
 });
 
