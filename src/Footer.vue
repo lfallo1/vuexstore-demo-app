@@ -10,7 +10,7 @@
 
     export default {
         computed: {
-            ...mapState({
+            ...mapState('userModule', {
                 users: 'users'
             })
         }
